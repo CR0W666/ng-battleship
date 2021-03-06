@@ -20,8 +20,9 @@ export class GameFactoryService {
       for (let y = 0; y < this.fieldSize; y++) {
         for (let x = 0; x < this.fieldSize; x++) {
 
-          let value = Math.round(Math.random());
-          const element: Field = new Field(value);
+          let value;
+          if(Math.round(Math.random()) != 0) value = FieldValue.WATER; else value = FieldValue.SHIP_PART;
+          const element: Field = new Field(value, FieldValue.UNKNOWN);
           const column = field[x] = field[x] || [];
           column[y] = element;
 
@@ -43,6 +44,42 @@ export class GameFactoryService {
         field[x][y].currentGame = game;
       }
     }
+  }
+
+  static checkWin(field: Field[][], doesEverythingHaveToBeDiscovered: boolean) {
+    let returnCond: boolean = true;
+    for (let y = 0; y < field.length; y++) {
+      for (let x = 0; x < field[0].length; x++) {
+
+        if(field[x][y].actualValue == FieldValue.SHIP_PART) {
+          returnCond = false;
+        }
+      }
+    }
+
+    if(doesEverythingHaveToBeDiscovered) {
+      let isEverythingDiscovered = this.isEverythingDiscovered(field);
+
+      if(isEverythingDiscovered) return returnCond; else return false;
+    } else {
+      return returnCond;
+    }
+
+  }
+
+  static isEverythingDiscovered(field: Field[][]): boolean {
+    for (let y = 0; y < field.length; y++) {
+      for (let x = 0; x < field[0].length; x++) {
+
+
+        if(field[x][y].value == FieldValue.UNKNOWN) {
+
+          return false;
+        }
+
+      }
+    }
+    return true;
   }
 
 }

@@ -3,7 +3,10 @@ export enum FieldValue {
 }
 
 export interface IField {
-  readonly value: FieldValue;
+
+  currentGame: IGame | undefined;
+  value: FieldValue;
+  actualValue: FieldValue;
 
   /**
    * @return changed instance of game with new state

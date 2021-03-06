@@ -1,6 +1,6 @@
 <div>
   <table>
-    <tr *ngFor="let row of game.grid">
+    <tr *ngFor="let row of game.field">
       <td (click)="shoot(field)" *ngFor="let field of row"
           [class.bg-danger]="field.value === partOfDestroyedShipValue"
           [class.bg-orange]="field.value === partValue"

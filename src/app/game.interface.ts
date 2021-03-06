@@ -15,6 +15,6 @@ export interface IField {
  * immutable state of the game
  */
 export interface IGame {
-  readonly grid: IField[][];
+  readonly field: IField[][];
   readonly didWin: boolean;
 }

@@ -1,13 +1,12 @@
 import {FieldValue, IField, IGame} from './game.interface';
 
 export class Game implements IGame {
-    grid: IField[][];
+    field: IField[][];
     didWin: boolean;
-      
-    constructor(grid: IField[][], didWin: boolean) {
-      this.grid = grid;
+
+    constructor(field: IField[][], didWin: boolean) {
+      this.field = field;
       this.didWin = didWin;
     }
-    
 
   }

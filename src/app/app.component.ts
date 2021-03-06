@@ -11,7 +11,7 @@ export class AppComponent {
   title = 'ng-battleship';
 
   game: IGame;
-
+  
   readonly unknownValue = FieldValue.UNKNOWN;
   readonly partValue = FieldValue.SHIP_PART;
   readonly waterValue = FieldValue.WATER;

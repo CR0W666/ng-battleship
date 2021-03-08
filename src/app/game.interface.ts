@@ -1,12 +1,16 @@
 export enum FieldValue {
   WATER, SHIP_PART, PART_OF_DESTROYED_SHIP, UNKNOWN
 }
+interface IState {
+  isVisible: boolean;
+  isShip: boolean;
+}
 
 export interface IField {
 
   currentGame: IGame | undefined;
-  value: FieldValue;
-  actualValue: FieldValue;
+  readonly value: FieldValue;
+  readonly actualValue: FieldValue;
 
   /**
    * @return changed instance of game with new state

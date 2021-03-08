@@ -25,7 +25,6 @@ export class GameFactoryService {
           const element: Field = new Field(value, FieldValue.UNKNOWN);
           const column = field[x] = field[x] || [];
           column[y] = element;
-
         }
       }
 
@@ -34,24 +33,25 @@ export class GameFactoryService {
 
   createGame(field: Field[][], winState: boolean) {
     let game = new Game(field, winState);
-    this.assignGame(game, field);
+    GameFactoryService.assignGame(game, field);
     return game;
   }
 
-  assignGame(game: IGame, field: Field[][]) {
-    for (let y = 0; y < this.fieldSize; y++) {
-      for (let x = 0; x < this.fieldSize; x++) {
-        field[x][y].currentGame = game;
+  static assignGame(game: IGame, field: Field[][]) {
+    for (let y = 0; y < field.length; y++) {
+      for (let x = 0; x < field[y].length; x++) {
+        field[y][x].currentGame = game;
       }
     }
   }
 
   static checkWin(field: Field[][], doesEverythingHaveToBeDiscovered: boolean) {
+
     let returnCond: boolean = true;
     for (let y = 0; y < field.length; y++) {
       for (let x = 0; x < field[0].length; x++) {
 
-        if(field[x][y].actualValue == FieldValue.SHIP_PART) {
+        if(field[y][x].actualValue == FieldValue.SHIP_PART) {
           returnCond = false;
         }
       }
@@ -72,8 +72,7 @@ export class GameFactoryService {
       for (let x = 0; x < field[0].length; x++) {
 
 
-        if(field[x][y].value == FieldValue.UNKNOWN) {
-
+        if(field[y][x].value == FieldValue.UNKNOWN) {
           return false;
         }
 
